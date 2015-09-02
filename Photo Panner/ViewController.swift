@@ -24,7 +24,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         var maximumXOffset: CGFloat = panningScrollView.contentSize.width - panningScrollView.bounds.width
         var minimumXOffset: CGFloat = 0.0
         var clampedXOffset: CGFloat = fmax(minimumXOffset, fmin(abs(horizontalOffset), abs(-maximumXOffset)))
-        var centeredY: CGFloat = 0.0 //(panningScrollView.contentSize.height / 2.0) - (panningScrollView.bounds.height / 2.0 )
+        var centeredY: CGFloat = 0.0//(panningScrollView.contentSize.height / 2.0) - (panningScrollView.bounds.height / 2.0 )
         return CGPointMake(clampedXOffset, centeredY)
     }
 
@@ -58,15 +58,17 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                 var zoomScale: CGFloat = (self.panningScrollView.bounds.height / self.panningScrollView.bounds.width) * (image.size.width / image.size.height)
                 var interpretedXOffset: CGFloat = self.panningScrollView.contentOffset.x + (invertedYRotationRate * zoomScale * kRotationMultiplier)
                 var contentOffset: CGPoint = self.clampedContentOffsetForHorizontalOffset(interpretedXOffset)
-                println("contentOffset: \(contentOffset)")
                 
-                self.panningScrollView.contentOffset = contentOffset
-            }
-        
+                UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.BeginFromCurrentState | UIViewAnimationOptions.AllowUserInteraction | UIViewAnimationOptions.CurveEaseOut, animations: {
+                    
+                    self.panningScrollView.setContentOffset(contentOffset, animated: false)
+                    
+                    }, completion: nil)
+                }
         })
         
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

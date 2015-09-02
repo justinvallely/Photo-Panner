@@ -14,6 +14,7 @@
 		9474EE0D1B73ABDA00D698CB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9474EE0B1B73ABDA00D698CB /* LaunchScreen.xib */; };
 		9474EE191B73ABDA00D698CB /* Photo_PannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9474EE181B73ABDA00D698CB /* Photo_PannerTests.swift */; };
 		9474EE231B75080C00D698CB /* mountain.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9474EE221B75080C00D698CB /* mountain.jpg */; };
+		EB1805F21B96C5A700806213 /* image1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = EB1805F11B96C5A700806213 /* image1.jpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		9474EE171B73ABDA00D698CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9474EE181B73ABDA00D698CB /* Photo_PannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo_PannerTests.swift; sourceTree = "<group>"; };
 		9474EE221B75080C00D698CB /* mountain.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mountain.jpg; sourceTree = "<group>"; };
+		EB1805F11B96C5A700806213 /* image1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image1.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				9474EE061B73ABDA00D698CB /* Main.storyboard */,
 				9474EE091B73ABDA00D698CB /* Images.xcassets */,
 				9474EE0B1B73ABDA00D698CB /* LaunchScreen.xib */,
+				EB1805F11B96C5A700806213 /* image1.jpeg */,
 				9474EE221B75080C00D698CB /* mountain.jpg */,
 				9474EE001B73ABDA00D698CB /* Supporting Files */,
 			);
@@ -198,6 +201,7 @@
 				9474EE081B73ABDA00D698CB /* Main.storyboard in Resources */,
 				9474EE0D1B73ABDA00D698CB /* LaunchScreen.xib in Resources */,
 				9474EE231B75080C00D698CB /* mountain.jpg in Resources */,
+				EB1805F21B96C5A700806213 /* image1.jpeg in Resources */,
 				9474EE0A1B73ABDA00D698CB /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
