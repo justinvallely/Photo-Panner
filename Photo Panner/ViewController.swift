@@ -9,70 +9,64 @@
 import UIKit
 import CoreMotion
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIScrollViewDelegate {
 
     let motionManager: CMMotionManager = CMMotionManager()
 
-    @IBOutlet weak var x: UILabel!
-    @IBOutlet weak var y: UILabel!
-    @IBOutlet weak var z: UILabel!
-
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var panningScrollView: UIScrollView!
+    var panningScrollView: UIScrollView!
+    var imageView: UIImageView!
 
     func maximumZoomScaleForImage(image: UIImage) -> CGFloat {
-        return (CGRectGetHeight(self.panningScrollView.bounds) / CGRectGetWidth(self.panningScrollView.bounds)) * (image.size.width / image.size.height)
+        return (panningScrollView.bounds.height / panningScrollView.bounds.width) * (image.size.width / image.size.height)
     }
 
     func clampedContentOffsetForHorizontalOffset(horizontalOffset: CGFloat) -> CGPoint {
-        var maximumXOffset: CGFloat = self.panningScrollView.contentSize.width - CGRectGetWidth(self.panningScrollView.bounds)
-        var minimumXOffset: Float = 0.0
-        var foo = Float(fmin(horizontalOffset, maximumXOffset))
-        var clampedXOffset: CGFloat = CGFloat(fmaxf(minimumXOffset, foo))
-        var centeredY: CGFloat = (self.panningScrollView.contentSize.height / 2.0) - (CGRectGetHeight(self.panningScrollView.bounds)) / 2.0
+        var maximumXOffset: CGFloat = panningScrollView.contentSize.width - panningScrollView.bounds.width
+        var minimumXOffset: CGFloat = 0.0
+        var clampedXOffset: CGFloat = fmax(minimumXOffset, fmin(abs(horizontalOffset), abs(-maximumXOffset)))
+        var centeredY: CGFloat = 0.0 //(panningScrollView.contentSize.height / 2.0) - (panningScrollView.bounds.height / 2.0 )
         return CGPointMake(clampedXOffset, centeredY)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-
-        let image = UIImage(named: "mountain.jpg")
-        //imageView = UIImageView(image: image)
-        //panningScrollView.addSubview(imageView)
-
-        var zoomScale: CGFloat = self.maximumZoomScaleForImage(image!)
-        self.panningScrollView.maximumZoomScale = (CGRectGetHeight(self.panningScrollView.bounds) / CGRectGetWidth(self.panningScrollView.bounds)) * (image!.size.width / image!.size.height)
-        self.panningScrollView.zoomScale = zoomScale
-
-        self.motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: { (motion, error) -> Void in
+       
+        let image: UIImage = UIImage(named: "mountain.jpg")!
+        imageView = UIImageView(image: image)
+        panningScrollView = UIScrollView(frame: view.bounds)
+        
+        var zoomScale: CGFloat = maximumZoomScaleForImage(image)
+        
+        panningScrollView.maximumZoomScale = (panningScrollView.bounds.height / panningScrollView.bounds.width) * (image.size.width / image.size.height)
+        panningScrollView.zoomScale = zoomScale
+        
+        view.addSubview(panningScrollView)
+        panningScrollView.addSubview(imageView)
+        
+        motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: { (motion, error) -> Void in
+        
             var xRotationRate: CGFloat = CGFloat(motion.rotationRate.x)
             var yRotationRate: CGFloat = CGFloat(motion.rotationRate.y) // device tilt
             var zRotationRate: CGFloat = CGFloat(motion.rotationRate.z) // as! CGFloat
-
+            
             //self.motionManager.deviceMotionUpdateInterval = 1
-
-            self.x.text = "\(xRotationRate)"
-            self.y.text = "\(yRotationRate)"
-            self.z.text = "\(zRotationRate)"
-
+            
             if fabs(yRotationRate) > (fabs(xRotationRate) + fabs(zRotationRate)) {
-                // Do our movement
+                
                 var kRotationMultiplier: CGFloat = 5
                 var invertedYRotationRate: CGFloat = yRotationRate * -1
-                var zoomScale: CGFloat = (CGRectGetHeight(self.panningScrollView.bounds) / CGRectGetWidth(self.panningScrollView.bounds)) * (image!.size.width / image!.size.height)
+                var zoomScale: CGFloat = (self.panningScrollView.bounds.height / self.panningScrollView.bounds.width) * (image.size.width / image.size.height)
                 var interpretedXOffset: CGFloat = self.panningScrollView.contentOffset.x + (invertedYRotationRate * zoomScale * kRotationMultiplier)
                 var contentOffset: CGPoint = self.clampedContentOffsetForHorizontalOffset(interpretedXOffset)
+                println("contentOffset: \(contentOffset)")
+                
+                self.panningScrollView.contentOffset = contentOffset
             }
-
-            
+        
         })
-
-
-
-
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
