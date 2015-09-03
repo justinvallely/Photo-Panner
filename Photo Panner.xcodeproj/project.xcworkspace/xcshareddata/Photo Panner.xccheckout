@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>A619AE5D-EBBF-44C5-822D-3DA940E7A56E</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Photo Panner</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>D4B4F03D737049E33B97285FAB173C6E47A70F12</key>
 		<string>https://github.com/justinvallely/Photo-Panner.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Photo Panner.xcodeproj</string>
+	<string>Photo Panner.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>D4B4F03D737049E33B97285FAB173C6E47A70F12</key>
@@ -34,7 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>D4B4F03D737049E33B97285FAB173C6E47A70F12</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Photo-Panner</string>
+			<string>Photo%20Panner</string>
 		</dict>
 	</array>
 </dict>

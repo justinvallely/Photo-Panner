@@ -53,7 +53,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             
             if fabs(yRotationRate) > (fabs(xRotationRate) + fabs(zRotationRate)) {
                 
-                var kRotationMultiplier: CGFloat = 5
+                var kRotationMultiplier: CGFloat = 3
                 var invertedYRotationRate: CGFloat = yRotationRate * -1
                 var zoomScale: CGFloat = (self.panningScrollView.bounds.height / self.panningScrollView.bounds.width) * (image.size.width / image.size.height)
                 var interpretedXOffset: CGFloat = self.panningScrollView.contentOffset.x + (invertedYRotationRate * zoomScale * kRotationMultiplier)
@@ -64,7 +64,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                     self.panningScrollView.setContentOffset(contentOffset, animated: false)
                     
                     }, completion: nil)
-                }
+            }
         })
         
     }
